@@ -2,7 +2,22 @@ const express = require("express");
 const router = express.Router();
 const Physician = require(__dirname + "/../models/physician");
 
-// get list of pysicians from db
+/**
+ * @swagger
+ * /api/physicians:
+ *    get:
+ *      description: Returns all physicians
+ *      parameters:
+ *        - in: query
+ *          name: lat
+ *        - in: query
+ *          name: lng
+ *      responses:
+ *        '200':
+ *          description: Successfully returned all user
+ *        '500':
+ *          description: Failed to query for users
+ */
 router.get("/physicians", (req, res, next) => {
   Physician.aggregate()
     .near({
@@ -16,7 +31,22 @@ router.get("/physicians", (req, res, next) => {
     });
 });
 
-// add a physician
+/**
+ * @swagger
+ * /api/physicians:
+ *    post:
+ *      description: adds physician
+ *      parameters:
+ *        - in: query
+ *          name: lat
+ *        - in: query
+ *          name: lng
+ *      responses:
+ *        '200':
+ *          description: Successfully returned all user
+ *        '500':
+ *          description: Failed to query for users
+ */
 router.post("/physicians", (req, res, next) => {
   Physician.create(req.body)
     .then((physician) => {
